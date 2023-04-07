@@ -1,0 +1,9 @@
+{
+    "token": "your token here",
+    "time_emojis": {
+        "night": "🌙",
+        "morning": "☀️",
+        "afternoon": "☀️",
+        "evening": "☀️"
+    }
+}
