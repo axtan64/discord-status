@@ -5,7 +5,7 @@ let PreviousMinute = -1;
 const GetEmojiStatusPair = () => {
     const date = new Date();
 
-    const RawHour = date.getHours() + 3;
+    const RawHour = date.getHours();
 
     let Hours = RawHour;
     let Minutes = date.getMinutes();
