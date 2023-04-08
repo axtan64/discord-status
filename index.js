@@ -5,26 +5,28 @@ let PreviousMinute = -1;
 const GetEmojiStatusPair = () => {
     const date = new Date();
 
-    let Hours = date.getHours();
+    const RawHour = date.getHours() + 3;
+
+    let Hours = RawHour;
     let Minutes = date.getMinutes();
-    const AMPM = Hours >= 12 ? 'PM' : 'AM';
 
     Hours = Hours % 12;
     Hours = Hours ? Hours : 12;
-
     Minutes = Minutes < 10 ? '0' + Minutes : Minutes;
-    
-    const AMPMTime = Hours + ':' + Minutes + AMPM;
 
-    if(Hours <= 4 || Hours >= 9) {
-        return [time_emojis.night, "Good Night! (" + AMPMTime + ")"]
-    } else if(Hours < 12) {
-        return [time_emojis.morning, "Good Morning! (" + AMPMTime + ")"]
-    } else if(Hours < 18) {
-        return [time_emojis.afternoon, "Good Afternoon! (" + AMPMTime + ")"]
+    let Emoji, Status
+    if(RawHour <= 4 || RawHour >= 21) {
+        [Emoji, Status] = [time_emojis.night, "Good Night!"]
+    } else if(RawHour < 12) {
+        [Emoji, Status] = [time_emojis.morning, "Good Morning!"]
+    } else if(RawHour < 18) {
+        [Emoji, Status] = [time_emojis.afternoon, "Good Afternoon!"]
     } else {
-        return [time_emojis.evening, "Good Evening! (" + AMPMTime + ")"]
+        [Emoji, Status] = [time_emojis.evening, "Good Evening!"]
     }
+    Status = `${Status} (${Hours + ":" + Minutes + (RawHour >= 12 ? 'PM' : 'AM')})`
+
+    return [Emoji, Status]
 }
 
 setInterval(function(){
